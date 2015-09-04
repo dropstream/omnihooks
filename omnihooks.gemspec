@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Karl Falconer"]
   spec.email         = ["karl.falconer@falconerdevelopment.com"]
   spec.summary       = 'A generalized framework for multiple-provider webhooks subscriptions.'
-  spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

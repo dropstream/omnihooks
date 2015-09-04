@@ -221,7 +221,6 @@ module OmniHooks
     # @param env [Hash] The Rack environment.
     def call!(env) # rubocop:disable CyclomaticComplexity, PerceivedComplexity
       @env = env
-
       return instrument if on_request_path? && OmniHooks.config.allowed_request_methods.include?(request.request_method.downcase.to_sym)
 
       @app.call(env)
@@ -253,13 +252,16 @@ module OmniHooks
       begin
         evt = get_event
         evt_type = get_event_type
+
         self.class.instrument(evt_type, evt) if evt
       rescue => e
         log(:error, e.message)
-        [500, {}, [nil]]
+        log(:error, e.backtrace.join("\n"))
+        [500, {}, [EMPTY_STRING]]
       else
+        log(:debug, "success")
         # Send a 200 response back to
-        [200, {}, [nil]]
+        [200, {}, [EMPTY_STRING]]
       end
     end
 
