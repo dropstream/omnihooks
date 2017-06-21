@@ -13,3 +13,4 @@
 *.a
 mkmf.log
 /spec/examples.txt
+*.sublime-*

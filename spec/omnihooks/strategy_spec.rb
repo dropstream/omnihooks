@@ -203,7 +203,7 @@ RSpec.describe OmniHooks::Strategy do
 
         expect(ActiveSupport::Notifications).to receive(:instrument).with('class.bar', 'Foo')
 
-        expect(instance.call(make_env('/hooks/class'))).to eq([200, {}, [nil]])
+        expect(instance.call(make_env('/hooks/class'))).to eq([200, {}, ['']])
       end
 
       context 'with exception in event callback' do
@@ -222,7 +222,7 @@ RSpec.describe OmniHooks::Strategy do
         
         it 'should return a non 200 response' do
           instance = klass.new(app)
-          expect(instance.call(make_env('/hooks/class'))).to eq([500, {}, [nil]])
+          expect(instance.call(make_env('/hooks/class'))).to eq([500, {}, ['']])
         end
       end
     end
@@ -242,7 +242,7 @@ RSpec.describe OmniHooks::Strategy do
         it 'should return a success response' do
           expect(subscriber).to receive(:call).with('Foo')
 
-          expect(strategy.call(make_env('/hooks/test', {'rack.input' => StringIO.new('type=foo.bar&payload=test')}))).to eq([200, {}, [nil]])
+          expect(strategy.call(make_env('/hooks/test', {'rack.input' => StringIO.new('type=foo.bar&payload=test')}))).to eq([200, {}, ['']])
         end
       end
 
@@ -250,7 +250,7 @@ RSpec.describe OmniHooks::Strategy do
         it 'should return a success response' do
           expect(subscriber).not_to receive(:call)
 
-          expect(strategy.call(make_env('/hooks/test', {'rack.input' => StringIO.new('type=foo.sam&payload=test')}))).to eq([200, {}, [nil]])
+          expect(strategy.call(make_env('/hooks/test', {'rack.input' => StringIO.new('type=foo.sam&payload=test')}))).to eq([200, {}, ['']])
         end
       end
 
@@ -260,7 +260,7 @@ RSpec.describe OmniHooks::Strategy do
         end
 
         it 'should return an error response' do
-          expect(strategy.call(make_env('/hooks/test', {'rack.input' => StringIO.new('type=foo.bar&payload=test')}))).to eq([500, {}, [nil]])
+          expect(strategy.call(make_env('/hooks/test', {'rack.input' => StringIO.new('type=foo.bar&payload=test')}))).to eq([500, {}, ['']])
         end
       end
 
@@ -285,7 +285,7 @@ RSpec.describe OmniHooks::Strategy do
       end
 
       it 'allows a request method of the correct type' do
-        expect(strategy.call(make_env('/hooks/test', 'REQUEST_METHOD' => 'PUT'))).to eq([200, {}, [nil]])
+        expect(strategy.call(make_env('/hooks/test', 'REQUEST_METHOD' => 'PUT'))).to eq([200, {}, ['']])
       end
 
       after do

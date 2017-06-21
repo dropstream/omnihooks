@@ -254,7 +254,7 @@ module OmniHooks
         evt_type = get_event_type
 
         self.class.instrument(evt_type, evt) if evt
-      rescue => e
+      rescue Exception => e
         log(:error, e.message)
         log(:error, e.backtrace.join("\n"))
         [500, {}, [EMPTY_STRING]]
