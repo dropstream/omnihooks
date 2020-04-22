@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport", ">= 3.1"
-  spec.add_dependency 'rack', '~> 1.0'
+  spec.add_dependency 'rack', ">= 1.2", "< 3"
   spec.add_dependency 'hashie', ['>= 1.2', '< 4']
   
   spec.add_development_dependency "bundler", "~> 1.7"
