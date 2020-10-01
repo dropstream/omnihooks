@@ -10,7 +10,7 @@ module OmniHooks
       else
         @app = app
         super(&block)
-        @ins << @app
+        @use << @app
       end
     end
 
