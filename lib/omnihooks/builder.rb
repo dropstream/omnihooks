@@ -3,19 +3,18 @@ require "active_support/inflector"
 module OmniHooks
   class Builder < ::Rack::Builder
 
-    def initialize(app, &block)
+    def initialize(app = nil, &block)
       @options = nil
       if rack14?
         super
       else
         @app = app
-        super(&block)
-        @use << @app
+        super(app, &block)
       end
     end
 
     def rack14?
-      Rack.release.split('.')[1].to_i >= 4
+      Rack.release.split('.')[0].to_i == 1 && Rack.release.split('.')[1].to_i >= 4
     end
 
     def on_failure(&block)
